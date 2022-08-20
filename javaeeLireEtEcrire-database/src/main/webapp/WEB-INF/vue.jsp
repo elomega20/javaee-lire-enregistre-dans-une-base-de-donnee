@@ -8,7 +8,7 @@
 <title>Test</title>
 </head>
 <body>
-    <form method="post" action="bonjour">
+    <form method="post" action="vue">
         <p>
             <label for="nom">Nom : </label>
             <input type="text" name="nom" id="nom" />

@@ -2,6 +2,7 @@ package com.el.bdd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -69,4 +70,19 @@ public class Noms {
 			e.printStackTrace();
 		}
 	}
+	
+	// pour ajouter un utilisateur
+    public void ajouterUtilisateur(Utilisateur utilisateur) {
+        loadDatabase(); // etablir une connection
+        
+        try {
+            PreparedStatement preparedStatement = connexion.prepareStatement("INSERT INTO noms(nom, prenom) VALUES(?, ?);");
+            preparedStatement.setString(1, utilisateur.getNom());
+            preparedStatement.setString(2, utilisateur.getPrenom());
+            
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

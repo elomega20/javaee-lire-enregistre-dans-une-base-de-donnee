@@ -3,6 +3,7 @@ package com.el.servlet;
 import java.io.IOException;
 
 import com.el.bdd.Noms;
+import com.el.beans.Utilisateur;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -29,6 +30,16 @@ public class Test extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Utilisateur utilisateur = new Utilisateur();
+		utilisateur.setNom(request.getParameter("nom"));
+		utilisateur.setPrenom(request.getParameter("prenom"));
+
+		Noms tableNoms = new Noms();
+		tableNoms.ajouterUtilisateur(utilisateur);
+
+		request.setAttribute("utilisateurs", tableNoms.recupererUtilisateurs());
+
+		this.getServletContext().getRequestDispatcher("/WEB-INF/vue.jsp").forward(request, response);
 	}
 
 }
